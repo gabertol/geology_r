@@ -21,8 +21,7 @@ editor_options:
 
 knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
 library(flipbookr)
-library(countdown)
-countdown::countdown()
+
 ```
 
 
@@ -659,7 +658,7 @@ validated_beds %>%
 plot(validated_beds)
 ```
 
-```{r,echo=TRUE,fig.align='center',out.width="50%"}
+```{r,echo=TRUE,fig.align='center',out.width="70%"}
  knitr::include_graphics("figs/estrati.png")
 ```
 
