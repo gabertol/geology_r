@@ -1,0 +1,99 @@
+---
+title: "Programação Funcional em R na Geologia"
+subtitle: "⚒<br/>Aplicações e Exemplos"
+author: "Gabriel Bertolini"
+institute: "Universidade Federal do Rio Grande do Sul"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, hygge, ninjutsu]
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+```{r, include = F}
+# This is the recommended set up for flipbooks
+# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+library(flipbookr)
+library(tidyverse)
+
+
+setwd("D:/Documentos Drive/Academicos/Aulas/Palestras/Geologia_R/geology_r") # definir diretorio de trabalho - local onde esta salvo os dados da sessão e bancos de dado
+
+gm_granite<-read.csv(file="geoquim_granite.csv",
+                     sep=";") # Importar dados a partir de banco de dados, notar uso do atributo sep que indica qual o tipo de caractere que separa cada célula 
+
+# Explorar tipos de amb
+
+gm_granite %>% count(Tectonic_setting)
+
+```
+
+
+
+# Hi!
+
+--
+
+This 'minimal flipbook' template has a couple of classic examples to get you building your first flipbooks!
+
+--
+
+flipbooks are code-movies.  The frames of the movies are slides. Here we use the R package {xaringan} to create a remark.js slideshow. 
+
+--
+
+Slide breaks are indicated with `---` (be careful trailing white space is not allowed)
+
+--
+
+flipbookr's `chunk_reveal()` disassembles a single code chunk and creates the "build" of multiple partial-code chunks on different slides (the --- is automatically generated for you too).  
+
+--
+
+We use `chunk_reveal()` it 'inline', not in a code chunk. 
+
+--
+
+Let's start!
+
+
+
+---
+class: inverse, middle, center
+
+
+# First up: classic flipbook, using defaults to walk through code pipeline
+
+
+
+
+
+<!-- get a flipbook version of the my_cars code chunk - pauses are where parentheses are balanced -->
+---
+
+`r chunk_reveal("my_cars")`
+
+```{r my_cars, include = FALSE}
+gm_granite %>% 
+  select(Tectonic_setting,SiO2:P2O5) %>%
+  drop_na() %>% 
+  group_by(Tectonic_setting) %>% 
+  mutate(across(cols=SiO2:P2O5,
+                .fns = as.double)) %>% 
+  pivot_longer(cols = SiO2:P2O5,
+               names_to="Major_element",
+               values_to="values") %>% 
+  ggplot(aes(x=Major_element,
+             y=values,
+             color=Major_element)) + 
+  geom_boxplot()+
+  facet_wrap(~Tectonic_setting)
+```
+---
