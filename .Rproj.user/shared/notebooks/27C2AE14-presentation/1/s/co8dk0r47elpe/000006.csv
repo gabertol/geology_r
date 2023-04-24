@@ -1,0 +1,11 @@
+"0","library(ggtern)"
+"0",""
+"0","gm_granite %>% "
+"0","  select(Tectonic_setting,Or,Ab,An,LaRoche) %>%"
+"0","  drop_na() %>% "
+"0","  group_by(Tectonic_setting) %>% "
+"0","  ggtern(aes(Or,Ab,An)) + "
+"0","  geom_point(size=1,alpha=0.5,aes(color=LaRoche))+"
+"0","  viri"
+"2","Erro: objeto 'viri' não encontrado
+"

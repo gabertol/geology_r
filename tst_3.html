@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>tst_3.knit</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/hygge.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/ninjutsu.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-1.3.1/leaflet.js"></script>
+    <link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+    <script src="libs/proj4-2.6.2/proj4.min.js"></script>
+    <script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+    <link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+    <script src="libs/leaflet-binding-2.1.1/leaflet.js"></script>
+    <script src="libs/leaflet-providers-1.9.0/leaflet-providers_1.9.0.js"></script>
+    <script src="libs/leaflet-providers-plugin-2.1.1/leaflet-providers-plugin.js"></script>
+    <script src="libs/FlatGeoBuf-3.21.3/fgb.js"></script>
+    <script src="libs/FlatGeoBuf-3.21.3/flatgeobuf-geojson.min.js"></script>
+    <script src="libs/chromajs-2.1.0/chroma.min.js"></script>
+    <link id="_-SIGLA_UNID-1-attachment" rel="attachment" href="libs/_-SIGLA_UNID-0.0.1/_-SIGLA_UNID_layer.fgb"/>
+    <link href="libs/HomeButton-0.0.1/home-button.css" rel="stylesheet" />
+    <script src="libs/HomeButton-0.0.1/home-button.js"></script>
+    <script src="libs/HomeButton-0.0.1/easy-button-src.min.js"></script>
+    <script src="libs/clipboard-0.0.1/setClipboardText.js"></script>
+    <link href="libs/mapviewCSS-0.0.1/mapview-popup.css" rel="stylesheet" />
+    <link href="libs/mapviewCSS-0.0.1/mapview.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+*st_read("./shape/riograndedosul_lito.shp")
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+]
+
+---
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;%
+* dplyr::select(SIGLA_UNID,NOME_UNIDA)
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+```
+Simple feature collection with 3362 features and 2 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+First 10 features:
+   SIGLA_UNID
+1       Q1pl3
+2        Q2tf
+3        Q2tf
+4         Q2a
+5         Q2a
+6         Q2a
+7       Q1pl3
+8        Q2pc
+9        Q2pi
+10       Q2tf
+                                                                     NOME_UNIDA
+1     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+2                                                        Depósitos de turfeira
+3                                                        Depósitos de turfeira
+4                                                        Depósitos aluvionares
+5                                                        Depósitos aluvionares
+6                                                        Depósitos aluvionares
+7     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+8  Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+9                                        Depósitos de planície de inundação
+10                                                       Depósitos de turfeira
+                         geometry
+1  MULTIPOLYGON (((-53.44228 -...
+2  MULTIPOLYGON (((-53.34404 -...
+3  MULTIPOLYGON (((-53.29115 -...
+4  MULTIPOLYGON (((-53.52043 -...
+5  MULTIPOLYGON (((-53.4202 -3...
+6  MULTIPOLYGON (((-53.42814 -...
+7  MULTIPOLYGON (((-53.46148 -...
+8  MULTIPOLYGON (((-53.50981 -...
+9  MULTIPOLYGON (((-53.50981 -...
+10 MULTIPOLYGON (((-53.44541 -...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;%
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %&gt;%
+* tidyr::drop_na(geometry)
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+```
+Simple feature collection with 3362 features and 2 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+First 10 features:
+   SIGLA_UNID
+1       Q1pl3
+2        Q2tf
+3        Q2tf
+4         Q2a
+5         Q2a
+6         Q2a
+7       Q1pl3
+8        Q2pc
+9        Q2pi
+10       Q2tf
+                                                                     NOME_UNIDA
+1     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+2                                                        Depósitos de turfeira
+3                                                        Depósitos de turfeira
+4                                                        Depósitos aluvionares
+5                                                        Depósitos aluvionares
+6                                                        Depósitos aluvionares
+7     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+8  Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+9                                        Depósitos de planície de inundação
+10                                                       Depósitos de turfeira
+                         geometry
+1  MULTIPOLYGON (((-53.44228 -...
+2  MULTIPOLYGON (((-53.34404 -...
+3  MULTIPOLYGON (((-53.29115 -...
+4  MULTIPOLYGON (((-53.52043 -...
+5  MULTIPOLYGON (((-53.4202 -3...
+6  MULTIPOLYGON (((-53.42814 -...
+7  MULTIPOLYGON (((-53.46148 -...
+8  MULTIPOLYGON (((-53.50981 -...
+9  MULTIPOLYGON (((-53.50981 -...
+10 MULTIPOLYGON (((-53.44541 -...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;%
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %&gt;%
+  tidyr::drop_na(geometry) %&gt;%
+* st_transform(crs=3857)
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+```
+Simple feature collection with 3362 features and 2 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -6416692 ymin: -3995389 xmax: -5531591 ymax: -3133498
+Projected CRS: WGS 84 / Pseudo-Mercator
+First 10 features:
+   SIGLA_UNID
+1       Q1pl3
+2        Q2tf
+3        Q2tf
+4         Q2a
+5         Q2a
+6         Q2a
+7       Q1pl3
+8        Q2pc
+9        Q2pi
+10       Q2tf
+                                                                     NOME_UNIDA
+1     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+2                                                        Depósitos de turfeira
+3                                                        Depósitos de turfeira
+4                                                        Depósitos aluvionares
+5                                                        Depósitos aluvionares
+6                                                        Depósitos aluvionares
+7     Depósitos de barreira pleistocênica 3 - Depósitos de planície lagunar
+8  Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+9                                        Depósitos de planície de inundação
+10                                                       Depósitos de turfeira
+                         geometry
+1  MULTIPOLYGON (((-5949167 -3...
+2  MULTIPOLYGON (((-5938232 -3...
+3  MULTIPOLYGON (((-5932344 -3...
+4  MULTIPOLYGON (((-5957867 -3...
+5  MULTIPOLYGON (((-5946710 -3...
+6  MULTIPOLYGON (((-5947593 -3...
+7  MULTIPOLYGON (((-5951305 -3...
+8  MULTIPOLYGON (((-5956685 -3...
+9  MULTIPOLYGON (((-5956685 -3...
+10 MULTIPOLYGON (((-5949516 -3...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;%
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %&gt;%
+  tidyr::drop_na(geometry) %&gt;%
+  st_transform(crs=3857) %&gt;%
+* st_intersection(.,read_municipality(code_muni= 4314902) %&gt;%
+*                   st_transform(crs=3857) %&gt;%
+*                   dplyr::select(geom))
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+```
+Simple feature collection with 46 features and 2 fields
+Geometry type: GEOMETRY
+Dimension:     XY
+Bounding box:  xmin: -5709733 ymin: -3538179 xmax: -5678623 ymax: -3495337
+Projected CRS: WGS 84 / Pseudo-Mercator
+First 10 features:
+        SIGLA_UNID
+1699 NP3_gamma_dfc
+1718           Q2a
+2012          Q2pc
+2089 NP3_gamma_dfc
+2117           Q2a
+2119          Q2pc
+2139 NP2_gamma_1pm
+2155 NP2_gamma_1pm
+2161         Q12ec
+2172          Q2pc
+                                                                       NOME_UNIDA
+1699                                                                 Cerro Grande
+1718                                                       Depósitos aluvionares
+2012 Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+2089                                                                 Cerro Grande
+2117                                                       Depósitos aluvionares
+2119 Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+2139                                                    Metagranitóides foliados
+2155                                                    Metagranitóides foliados
+2161                                              Depósitos eluviais e coluviais
+2172 Depósitos de barreira holocênica - Depósitos de praiais e cristas lagunas
+                           geometry
+1699 POLYGON ((-5700932 -3527037...
+1718 MULTIPOLYGON (((-5684916 -3...
+2012 POLYGON ((-5695149 -3537434...
+2089 POLYGON ((-5697219 -3533687...
+2117 MULTIPOLYGON (((-5684292 -3...
+2119 POLYGON ((-5693712 -3536226...
+2139 POLYGON ((-5697705 -3530349...
+2155 POLYGON ((-5694284 -3530831...
+2161 POLYGON ((-5680982 -3531539...
+2172 POLYGON ((-5698971 -3530037...
+```
+]
+
+---
+count: false
+ 
+
+.panel1-teste-auto[
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;%
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %&gt;%
+  tidyr::drop_na(geometry) %&gt;%
+  st_transform(crs=3857) %&gt;%
+  st_intersection(.,read_municipality(code_muni= 4314902) %&gt;%
+                    st_transform(crs=3857) %&gt;%
+                    dplyr::select(geom)) %&gt;%
+* mapview(.,zcol="SIGLA_UNID",alpha=0.5,lwd=3)
+```
+]
+ 
+.panel2-teste-auto[
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+<div id="htmlwidget-377bec8684f4e8c8c0b2" style="width:432px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-377bec8684f4e8c8c0b2">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addFlatGeoBuf","args":["_-SIGLA_UNID",". - SIGLA_UNID",null,true,"SIGLA_UNID",{"radius":6,"stroke":true,"color":"#333333","weight":3,"opacity":0.5,"fill":true,"fillColor":null,"fillOpacity":0.6},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-51.2914003990298,-30.2690366578386,-51.0119421989018,-29.9360875428685,true,". - SIGLA_UNID","Zoom to . - SIGLA_UNID","<strong> . - SIGLA_UNID <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],". - SIGLA_UNID",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055","#422C70","#185086","#007094","#008E98","#00A890","#00BE7D","#6CD05E","#BBDD38","#FDE333"],"labels":["NP2_gamma_1pm","NP3_gamma_dfc","NP3_gamma_dfe","PP2arr","Q12ec","Q2a","Q2d","Q2pc","Q2pi","Q2tf"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":". - SIGLA_UNID","extra":null,"layerId":null,"className":"info legend","group":". - SIGLA_UNID"}]}],"fitBounds":[-30.2690366578386,-51.2914003990298,-29.9360875428685,-51.0119421989018,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+]
+
+&lt;style&gt;
+.panel1-teste-auto {
+  color: black;
+  width: 38.6060606060606%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel2-teste-auto {
+  color: black;
+  width: 59.3939393939394%;
+  hight: 32%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+.panel3-teste-auto {
+  color: black;
+  width: NA%;
+  hight: 33%;
+  float: left;
+  padding-left: 1%;
+  font-size: 80%
+}
+&lt;/style&gt;
+
+
+
+
+
+```r
+st_read("./shape/riograndedosul_lito.shp") %&gt;% 
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %&gt;% 
+  tidyr::drop_na(geometry) %&gt;%  
+  st_transform(crs=3857) %&gt;% 
+  st_intersection(.,read_municipality(code_muni= 4314902) %&gt;% 
+                    st_transform(crs=3857) %&gt;% 
+                    dplyr::select(geom)) %&gt;% 
+  mapview(.,zcol="SIGLA_UNID",alpha=0.5,lwd=3)
+```
+
+```
+Reading layer `riograndedosul_lito' from data source 
+  `G:\Meu Drive\Academicos\Aulas\Palestras\Geologia_R\geology_r\shape\riograndedosul_lito.shp' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 3362 features and 46 fields (with 1 geometry empty)
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -57.64213 ymin: -33.75079 xmax: -49.69113 ymax: -27.08022
+Geodetic CRS:  SIRGAS 2000
+```
+
+<div id="htmlwidget-5e3d18e18197f8afd0fa" style="width:432px;height:504px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5e3d18e18197f8afd0fa">{"x":{"options":{"minZoom":1,"maxZoom":52,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}},"preferCanvas":false,"bounceAtZoomLimits":false,"maxBounds":[[[-90,-370]],[[90,370]]]},"calls":[{"method":"addProviderTiles","args":["CartoDB.Positron","CartoDB.Positron","CartoDB.Positron",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["CartoDB.DarkMatter","CartoDB.DarkMatter","CartoDB.DarkMatter",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenStreetMap","OpenStreetMap","OpenStreetMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["Esri.WorldImagery","Esri.WorldImagery","Esri.WorldImagery",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"addProviderTiles","args":["OpenTopoMap","OpenTopoMap","OpenTopoMap",{"errorTileUrl":"","noWrap":false,"detectRetina":false,"pane":"tilePane"}]},{"method":"createMapPane","args":["polygon",420]},{"method":"addFlatGeoBuf","args":["_-SIGLA_UNID",". - SIGLA_UNID",null,true,"SIGLA_UNID",{"radius":6,"stroke":true,"color":"#333333","weight":3,"opacity":0.5,"fill":true,"fillColor":null,"fillOpacity":0.6},{"className":"","pane":"polygon"},"mapview-popup",{"radius":{"to":[3,15],"from":[3,15]},"weight":{"to":[1,10],"from":[1,10]},"opacity":{"to":[0,1],"from":[0,1]},"fillOpacity":{"to":[0,1],"from":[0,1]}}]},{"method":"addScaleBar","args":[{"maxWidth":100,"metric":true,"imperial":true,"updateWhenIdle":true,"position":"bottomleft"}]},{"method":"addHomeButton","args":[-51.2914003990298,-30.2690366578386,-51.0119421989018,-29.9360875428685,true,". - SIGLA_UNID","Zoom to . - SIGLA_UNID","<strong> . - SIGLA_UNID <\/strong>","bottomright"]},{"method":"addLayersControl","args":[["CartoDB.Positron","CartoDB.DarkMatter","OpenStreetMap","Esri.WorldImagery","OpenTopoMap"],". - SIGLA_UNID",{"collapsed":true,"autoZIndex":true,"position":"topleft"}]},{"method":"addLegend","args":[{"colors":["#4B0055","#422C70","#185086","#007094","#008E98","#00A890","#00BE7D","#6CD05E","#BBDD38","#FDE333"],"labels":["NP2_gamma_1pm","NP3_gamma_dfc","NP3_gamma_dfe","PP2arr","Q12ec","Q2a","Q2d","Q2pc","Q2pi","Q2tf"],"na_color":null,"na_label":"NA","opacity":1,"position":"topright","type":"factor","title":". - SIGLA_UNID","extra":null,"layerId":null,"className":"info legend","group":". - SIGLA_UNID"}]}],"fitBounds":[-30.2690366578386,-51.2914003990298,-29.9360875428685,-51.0119421989018,[]]},"evals":[],"jsHooks":{"render":[{"code":"function(el, x, data) {\n  return (\n      function(el, x, data) {\n      // get the leaflet map\n      var map = this; //HTMLWidgets.find('#' + el.id);\n      // we need a new div element because we have to handle\n      // the mouseover output separately\n      // debugger;\n      function addElement () {\n      // generate new div Element\n      var newDiv = $(document.createElement('div'));\n      // append at end of leaflet htmlwidget container\n      $(el).append(newDiv);\n      //provide ID and style\n      newDiv.addClass('lnlt');\n      newDiv.css({\n      'position': 'relative',\n      'bottomleft':  '0px',\n      'background-color': 'rgba(255, 255, 255, 0.7)',\n      'box-shadow': '0 0 2px #bbb',\n      'background-clip': 'padding-box',\n      'margin': '0',\n      'padding-left': '5px',\n      'color': '#333',\n      'font': '9px/1.5 \"Helvetica Neue\", Arial, Helvetica, sans-serif',\n      'z-index': '700',\n      });\n      return newDiv;\n      }\n\n\n      // check for already existing lnlt class to not duplicate\n      var lnlt = $(el).find('.lnlt');\n\n      if(!lnlt.length) {\n      lnlt = addElement();\n\n      // grab the special div we generated in the beginning\n      // and put the mousmove output there\n\n      map.on('mousemove', function (e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                           ' lon: ' + (e.latlng.lng).toFixed(5) +\n                           ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                           ' | zoom: ' + map.getZoom() +\n                           ' | x: ' + L.CRS.EPSG3857.project(e.latlng).x.toFixed(0) +\n                           ' | y: ' + L.CRS.EPSG3857.project(e.latlng).y.toFixed(0) +\n                           ' | epsg: 3857 ' +\n                           ' | proj4: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs ');\n      } else {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      }\n      });\n\n      // remove the lnlt div when mouse leaves map\n      map.on('mouseout', function (e) {\n      var strip = document.querySelector('.lnlt');\n      if( strip !==null) strip.remove();\n      });\n\n      };\n\n      //$(el).keypress(67, function(e) {\n      map.on('preclick', function(e) {\n      if (e.originalEvent.ctrlKey) {\n      if (document.querySelector('.lnlt') === null) lnlt = addElement();\n      lnlt.text(\n                      ' lon: ' + (e.latlng.lng).toFixed(5) +\n                      ' | lat: ' + (e.latlng.lat).toFixed(5) +\n                      ' | zoom: ' + map.getZoom() + ' ');\n      var txt = document.querySelector('.lnlt').textContent;\n      console.log(txt);\n      //txt.innerText.focus();\n      //txt.select();\n      setClipboardText('\"' + txt + '\"');\n      }\n      });\n\n      }\n      ).call(this.getMap(), el, x, data);\n}","data":null},{"code":"function(el, x, data) {\n  return (function(el,x,data){\n           var map = this;\n\n           map.on('keypress', function(e) {\n               console.log(e.originalEvent.code);\n               var key = e.originalEvent.code;\n               if (key === 'KeyE') {\n                   var bb = this.getBounds();\n                   var txt = JSON.stringify(bb);\n                   console.log(txt);\n\n                   setClipboardText('\\'' + txt + '\\'');\n               }\n           })\n        }).call(this.getMap(), el, x, data);\n}","data":null}]}}</script>
+
+&lt;style type="text/css"&gt;
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+&lt;/style&gt;
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

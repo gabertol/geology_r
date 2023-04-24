@@ -1,0 +1,50 @@
+---
+output:
+  xaringan::moon_reader:
+    css: [default, hygge, ninjutsu]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r ,include=FALSE }
+
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+library(flipbookr)
+library(tidyverse)
+library(ggpubr)
+library(sf)
+library(mapview)
+library(geobr)
+
+```
+
+
+`r chunk_reveal("teste")`
+
+
+```{r teste, warning=FALSE, message=FALSE}
+
+
+st_read("./shape/riograndedosul_lito.shp") %>% 
+  dplyr::select(SIGLA_UNID,NOME_UNIDA) %>% 
+  tidyr::drop_na(geometry) %>%  
+  st_transform(crs=3857) %>% 
+  st_intersection(.,read_municipality(code_muni= 4314902) %>% 
+                    st_transform(crs=3857) %>% 
+                    dplyr::select(geom)) %>% 
+  mapview(.,zcol="SIGLA_UNID",alpha=0.5,lwd=3)
+```
+
+```{css, echo = FALSE}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```

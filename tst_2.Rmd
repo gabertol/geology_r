@@ -1,0 +1,56 @@
+---
+output:
+  xaringan::moon_reader:
+    css: [default, hygge, ninjutsu]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r ,include=FALSE }
+
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+library(flipbookr)
+library(tidyverse)
+library(ggpubr)
+
+```
+
+
+`r chunk_reveal("teste")`
+
+
+```{r teste, warning=FALSE, message=FALSE}
+
+
+read.csv(file="geoquim_granite.csv",
+                     sep=";")  %>% 
+  select(Tectonic_setting,SiO2:P2O5) %>%
+  drop_na() %>% 
+  group_by(Tectonic_setting) %>% 
+  mutate(across(cols=TiO2:P2O5,
+                .fns = as.double)) %>% 
+  pivot_longer(cols = TiO2:P2O5,
+               names_to="Major_element",
+               values_to="values") %>% 
+  ggplot(aes(x=Major_element,
+             y=values,
+             color=Major_element,
+             fill=Major_element)) + 
+  geom_boxplot()+
+  facet_wrap(~Tectonic_setting)+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+```{css, echo = FALSE}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```

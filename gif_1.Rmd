@@ -1,0 +1,48 @@
+---
+title: "Embedded Flipbook"
+author: Me, an Rmarkdown writer and flipbook builder
+output: html_document
+---
+---
+title: "Programação Funcional em R na Geologia"
+subtitle: "⚒<br/>Aplicações e Exemplos"
+author: "Gabriel Bertolini"
+institute: "Universidade Federal do Rio Grande do Sul"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    css: [default, hygge, ninjutsu]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+`r chunk_reveal("teste")`
+
+
+```{r teste, warning=FALSE, message=FALSE}
+
+
+read.csv("petrophysics_bertolini_2020.csv", sep=";") %>% 
+  as_tibble() %>%
+  drop_na(p_wave,s_wave) %>% 
+  ggplot(aes(x=p_wave,
+             y=s_wave)) + 
+  geom_point(aes(col=density,
+                 size=porosity))+
+  geom_smooth(method="lm")+
+  stat_cor(aes(label=paste(..r.label..,..p.label.., sep="~','~")), 
+           method="spearman")+
+  labs(title="",
+      x="P-Wave velocity (km/s)",
+      y="S-Wave velocity (km/s)")+
+  theme_bw()
+```
+
+
+

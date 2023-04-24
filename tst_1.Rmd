@@ -1,0 +1,54 @@
+---
+output:
+  xaringan::moon_reader:
+    css: [default, hygge, ninjutsu]
+    lib_dir: libs
+    nature:
+      ratio: 16:9
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r ,include=FALSE }
+
+knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+library(flipbookr)
+library(tidyverse)
+library(ggpubr)
+
+```
+
+
+`r chunk_reveal("teste")`
+
+
+```{r teste, warning=FALSE, message=FALSE}
+
+
+read.csv("petrophysics_bertolini_2020.csv", sep=";") %>% 
+  as_tibble() %>%
+  drop_na(p_wave,s_wave) %>% 
+  ggplot(aes(x=p_wave,
+             y=s_wave)) + 
+  geom_point(aes(col=density,
+                 size=porosity))+
+  geom_smooth(method="lm")+
+  stat_cor(aes(label=paste(..r.label..,..p.label.., sep="~','~")), 
+           method="spearman")+
+  labs(title="Petrophysical correlation Botucatu Formation ",
+      x="P-Wave velocity (km/s)",
+      y="S-Wave velocity (km/s)",
+      subtitle = "Source= Bertolini et al. (2020)")+
+  theme_bw()
+```
+
+```{css, echo = FALSE}
+@media print {
+  .has-continuation {
+    display: block;
+  }
+}
+```

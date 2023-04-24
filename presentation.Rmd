@@ -88,9 +88,7 @@ A+B
 C<- A+B
 
 C
-
 ```
-
 
 ---
 #<b>Sintaxe básica 2</b>
@@ -278,8 +276,9 @@ gm_granite %>%
 `r chunk_reveal("gran_2")`
 
 ```{r gran_2, include = FALSE}
-gm_granite %>% 
-  select(Tectonic_setting,SiO2:P2O5) %>%
+gm_granite<-read.csv(file="geoquim_granite.csv",
+                     sep=";")  %>% 
+  dplyr::select(Tectonic_setting,SiO2:P2O5) %>%
   drop_na() %>% 
   group_by(Tectonic_setting) %>% 
   mutate(across(cols=TiO2:P2O5,
@@ -308,27 +307,6 @@ gm_granite %>%
 
 `r chunk_reveal("gran_3")`
 
-```{r gran_3, warning=FALSE, include=FALSE}
-library(ggtern)
-
-gm_granite %>% 
-  select(Group,Or,Ab,An,TASMiddlemostPlut) %>%
-  drop_na() %>% 
-  filter(Group=="2- Archaean TTG") %>% 
-  ggtern(aes(Or,Ab,An)) + 
-  stat_density_tern(geom='polygon',
-                    aes(fill=..level..),
-                    bins=5,
-                    color="gray")+
-  geom_point(size=1.2,
-             alpha=.7,
-             aes(col=TASMiddlemostPlut,
-                 shape=TASMiddlemostPlut))+
-  theme_bw()+
-  labs(title="Ab-An-Or em granitoides Arqueanos TTG")
-```
----
-
 #<b>Explorando dados geológicos II</b>
 ## Dados Espaciais 
 
@@ -347,7 +325,7 @@ gm_granite %>%
 
 library(sf) #pacote para lidar com dados espaciais
 library(geobr) # API de dados espaciais BR
-
+#Pereira, R.H.M.; Gonçalves, C.N.; et. all (2019) geobr: Loads Shapefiles of Official Spatial Data Sets of Brazil. GitHub repository - https://github.com/ipeaGIT/geobr.
 
 poa <- read_municipality(code_muni= 4314902) %>% 
   st_transform(crs=3857) %>% 
@@ -387,11 +365,13 @@ geo_shape<-st_read("./shape/riograndedosul_lito.shp")
 
 ```{r SIG_1, warning=FALSE, include=FALSE, font_size = 10}
 
-geo_shape %>% 
+st_read("./shape/riograndedosul_lito.shp") %>% 
   dplyr::select(SIGLA_UNID,NOME_UNIDA) %>% 
   tidyr::drop_na(geometry) %>%  
   st_transform(crs=3857) %>% 
-  st_intersection(.,poa) %>% 
+  st_intersection(.,read_municipality(code_muni= 4314902) %>% 
+                    st_transform(crs=3857) %>% 
+                    dplyr::select(geom)) %>% 
   mapview(.,zcol="SIGLA_UNID",alpha=0.5,lwd=3)
 ```
 
@@ -439,7 +419,7 @@ library(mapview)
 library(sf)
 
 download.file("https://ars.els-cdn.com/content/image/1-s2.0-S0012825221002178-mmc1.xlsx", destfile = "./file.xlsx",mode = "wb")
-ages<-read_xlsx("D:/Documentos Drive/Academicos/Aulas/Palestras/Geologia_R/geology_r/file.xlsx",sheet=1)
+ages<-read_xlsx("D:/Documentos Drive/Academicos/Aulas/Palestras/Geologia_R/geology_r/file.xlsx",sheet=1) %>% as_tibble(.,.name_repair = janitor::make_clean_names)
 glimpse(ages)
 ```
 
@@ -449,10 +429,12 @@ glimpse(ages)
 
 .pull-left[
 ```{r BBBBB, eval=FALSE}
-ages %>% 
-  rename(Hemi_long="E/W",
-         Hemi_lat="N/S",
-         Peate="Paraná classification                                                                   (Peate et al., 1992)") %>%
+library(janitor)
+aak<-ages %>% 
+
+  dplyr::rename(Hemi_long="E/W",
+         Hemi_lat="N/S") %>% 
+  mutate(Peate="Paraná classification                                                                   (Peate et al., 1992)") %>%
   filter(!Latitude=="not reported") %>% 
       # !Peate %in% c("not analysed","not reported","-")) %>% 
   unite(long_DMS,Longitude,Hemi_long, sep="") %>% 
@@ -478,8 +460,8 @@ ages %>%
 .pull-left[
 ```{r CCCCC, eval=FALSE}
 ages %>% 
-  rename(Hemi_long="E/W",
-         Hemi_lat="N/S",
+  rename(Hemi_long="e_w",
+         Hemi_lat="n_s",
          Peate="Paraná classification                                                                   (Peate et al., 1992)",
          age="Recalculated age (Ma)") %>%
   filter(!Latitude=="not reported") %>%
@@ -569,7 +551,8 @@ raster::writeRaster(map3,'Early_K_paleomap.tif',
 ```{r}
 library(tmap)
 library(raster)
-map4<-raster("Early_K_paleomap.tif")
+library(stars)
+map4<-stars::read_stars("Early_K_paleomap.tif")
 ```
 ---
 
